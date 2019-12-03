@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BerlinClock.Classes.Parser;
 using BerlinClock.Classes.Validation;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace BerlinClock.Classes.Common
         private static void RegisterTypes(ContainerBuilder builder)
         {
             builder.RegisterType<TimeValidator>().As<ITimeValidator>();
+            builder.RegisterType<TimeParser>().As<ITimeParser>();
         }
     }
 }
