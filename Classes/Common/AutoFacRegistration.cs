@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using BerlinClock.Classes.Parser;
+using BerlinClock.Classes.Printers;
 using BerlinClock.Classes.Validation;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,9 @@ namespace BerlinClock.Classes.Common
         {
             builder.RegisterType<TimeValidator>().As<ITimeValidator>();
             builder.RegisterType<TimeParser>().As<ITimeParser>();
+            builder.RegisterType<SecondsPrinter>().AsSelf();
+            builder.RegisterType<HoursPrinter>().AsSelf();
+            builder.RegisterType<MinutesPrinter>().AsSelf();
         }
     }
 }
