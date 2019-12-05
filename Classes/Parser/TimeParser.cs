@@ -1,5 +1,5 @@
 ﻿using BerlinClock.Classes.Common;
-using BerlinClock.Classes.Validation;
+using System.Text.RegularExpressions;
 
 namespace BerlinClock.Classes.Parser
 {
@@ -13,29 +13,84 @@ namespace BerlinClock.Classes.Parser
 
         private const int SECONDS_INDEX = 2;
 
-        private readonly ITimeValidator timeValidator;
-
-        public TimeParser()
-        {
-            this.timeValidator = new TimeValidator();
-        }
 
         public TimeEntity Parse(string input)
         {
-            if (!this.timeValidator.ValidateEntry(input))
+            if (string.IsNullOrEmpty(input))
             {
-                throw new TimeFormatException("Incorrect time argument");
+                throw new TimeFormatException("Empty time argument");
             }
 
-            string[] parts = input.Split(TIME_SEPARATOR);
+            string[] timePartials = input.Split(TIME_SEPARATOR);
 
-            var hours = int.Parse(parts[HOURS_INDEX]);
+            if (timePartials.Length != 3)
+            {
+                throw new TimeFormatException("Incorrect format of time argument");
+            }
 
-            var minutes = int.Parse(parts[MINUTES_INDEX]);
-
-            var seconds = int.Parse(parts[SECONDS_INDEX]);
+            int seconds = this.provideSeconds(timePartials);
+            int minutes = this.provideMinutes(timePartials);
+            int hours = this.provideHours(timePartials, minutes, seconds);
 
             return new TimeEntity(hours, minutes, seconds);
+        }
+
+        private int provideHours(string[] timePartials, int minutes, int seconds)
+        {
+            int hours;
+
+            if (!int.TryParse(timePartials[HOURS_INDEX], out hours))
+            {
+                throw new TimeFormatException("Incorrect hours value");
+            }
+
+            if (hours < 0 || hours > 24)
+            {
+                throw new TimeFormatException("Hour exceeds allowed range");
+            }
+
+            int specialHour = 24;
+
+            if (hours == specialHour && (minutes != 0 || seconds != 0))
+            {
+                throw new TimeFormatException("Incorrect time for hour: 24");
+            }
+
+            return hours;
+        }
+
+        private int provideMinutes(string[] timePartials)
+        {
+            int minutes;
+
+            if (!int.TryParse(timePartials[MINUTES_INDEX], out minutes))
+            {
+                throw new TimeFormatException("Incorrect minutes value");
+            }
+
+            if (minutes < 0 || minutes > 59)
+            {
+                throw new TimeFormatException("Minutes exceeds allowed range");
+            }
+
+            return minutes;
+        }
+
+        private int provideSeconds(string[] timePartials)
+        {
+            int seconds;
+
+            if (!int.TryParse(timePartials[SECONDS_INDEX], out seconds))
+            {
+                throw new TimeFormatException("Incorrect seconds value");
+            }
+
+            if (seconds < 0 || seconds > 59)
+            {
+                throw new TimeFormatException("Seconds exceeds allowed range");
+            }
+
+            return seconds;
         }
     }
 }
