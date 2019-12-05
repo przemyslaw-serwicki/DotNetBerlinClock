@@ -2,10 +2,10 @@
 {
     public static class Colors
     {
-        public static string None = "O";
+        public static char None = 'O';
 
-        public static string Red = "R";
+        public static char Red = 'R';
 
-        public static string Yellow = "Y";
+        public static char Yellow = 'Y';
     }
 }

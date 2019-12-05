@@ -24,10 +24,7 @@ namespace BerlinClock.Classes.Printers
         {
             int numberOfActiveLamps = hours / HOURS_DIVIDER;
 
-            for (int i = 0; i < numberOfActiveLamps; i++)
-            {
-                this.stringBuilder.Append(Colors.Red);
-            }
+            this.stringBuilder.Append(Colors.Red, numberOfActiveLamps);
 
             for (int i = numberOfActiveLamps; i < LAMPS_IN_FIRST_ROW; i++)
             {
@@ -39,10 +36,7 @@ namespace BerlinClock.Classes.Printers
         {
             int numberOfActiveLamps = hours % HOURS_DIVIDER;
 
-            for (int i = 0; i < numberOfActiveLamps; i++)
-            {
-                this.stringBuilder.Append(Colors.Red);
-            }
+            this.stringBuilder.Append(Colors.Red, numberOfActiveLamps);
 
             for (int i = numberOfActiveLamps; i < LAMPS_IN_SECOND_ROW; i++)
             {

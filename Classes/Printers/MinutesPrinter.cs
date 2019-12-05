@@ -28,7 +28,7 @@ namespace BerlinClock.Classes.Printers
 
             for (int i = 1; i <= numberOfActiveLamps; i++)
             {
-                string color = i % NUMBER_OF_QUARTERS_WITHIN_HOUR == 0 ? Colors.Red : Colors.Yellow;
+                char color = i % NUMBER_OF_QUARTERS_WITHIN_HOUR == 0 ? Colors.Red : Colors.Yellow;
                 this.stringBuilder.Append(color);
             }
 
@@ -42,10 +42,7 @@ namespace BerlinClock.Classes.Printers
         {
             int numberOfActiveLamps = minutes % MINUTES_DIVIDER;
 
-            for (int i = 0; i < numberOfActiveLamps; i++)
-            {
-                this.stringBuilder.Append(Colors.Yellow);
-            }
+            this.stringBuilder.Append(Colors.Yellow, numberOfActiveLamps);
 
             for (int i = numberOfActiveLamps; i < LAMPS_IN_SECOND_ROW; i++)
             {

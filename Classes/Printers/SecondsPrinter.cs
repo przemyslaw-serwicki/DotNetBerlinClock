@@ -8,7 +8,7 @@ namespace BerlinClock.Classes.Printers
         protected override void HandlePrint(TimeEntity time)
         {
             int numberOfSeconds = time.seconds;
-            string color = numberOfSeconds % 2 > 0 ? Colors.None : Colors.Yellow;
+            char color = numberOfSeconds % 2 > 0 ? Colors.None : Colors.Yellow;
 
             this.stringBuilder.Append(color);
         }
