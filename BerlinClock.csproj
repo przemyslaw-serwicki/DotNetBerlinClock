@@ -56,11 +56,11 @@
     <Compile Include="Classes\Parser\ITimeParser.cs" />
     <Compile Include="Classes\Parser\TimeParser.cs" />
     <Compile Include="Classes\Printers\HoursPrinter.cs" />
+    <Compile Include="Classes\Printers\IPrinter.cs" />
     <Compile Include="Classes\Printers\ITimePrinter.cs" />
     <Compile Include="Classes\Printers\MinutesPrinter.cs" />
     <Compile Include="Classes\Printers\SecondsPrinter.cs" />
     <Compile Include="Classes\Printers\TimePrinter.cs" />
-    <Compile Include="Classes\Printers\TimeUnitPrinterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BDD\BerlinClockFeatureSteps.feature.cs">
       <AutoGen>True</AutoGen>
