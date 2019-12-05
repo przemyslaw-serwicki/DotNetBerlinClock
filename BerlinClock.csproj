@@ -35,10 +35,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,14 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BDD\BerlinClockFeatureSteps.cs" />
-    <Compile Include="Classes\Common\AutoFacRegistration.cs" />
-    <Compile Include="Classes\Common\ColorsEnum.cs" />
+    <Compile Include="Classes\Common\Colors.cs" />
     <Compile Include="Classes\Common\TimeEntity.cs" />
+    <Compile Include="Classes\Common\TimeFormatException.cs" />
     <Compile Include="Classes\Parser\ITimeParser.cs" />
     <Compile Include="Classes\Parser\TimeParser.cs" />
     <Compile Include="Classes\Printers\HoursPrinter.cs" />
+    <Compile Include="Classes\Printers\ITimePrinter.cs" />
     <Compile Include="Classes\Printers\MinutesPrinter.cs" />
     <Compile Include="Classes\Printers\SecondsPrinter.cs" />
+    <Compile Include="Classes\Printers\TimePrinter.cs" />
+    <Compile Include="Classes\Printers\TimeUnitPrinterBase.cs" />
     <Compile Include="Classes\Validation\ITimeValidator.cs" />
     <Compile Include="Classes\Validation\TimeValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,7 +71,6 @@
     </Compile>
     <Compile Include="Classes\ITimeConverter.cs" />
     <Compile Include="Classes\TimeConverter.cs" />
-    <Compile Include="Tests\TimeConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -1,19 +1,16 @@
 ﻿using BerlinClock.Classes.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BerlinClock.Classes.Printers
 {
-    public class SecondsPrinter
+    public class SecondsPrinter : TimeUnitPrinterBase
     {
-        public string Print(TimeEntity time)
+        protected override void HandlePrint(TimeEntity time)
         {
-            var numberOfSeconds = time.Seconds;
+            int numberOfSeconds = time.seconds;
+            string color = numberOfSeconds % 2 > 0 ? Colors.None : Colors.Yellow;
 
-            return numberOfSeconds % 2 > 0 ? Colors.None : Colors.Yellow;
+            this.stringBuilder.Append(color);
         }
     }
 }

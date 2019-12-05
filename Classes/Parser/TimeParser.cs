@@ -1,11 +1,5 @@
-﻿using Autofac;
-using BerlinClock.Classes.Common;
+﻿using BerlinClock.Classes.Common;
 using BerlinClock.Classes.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BerlinClock.Classes.Parser
 {
@@ -23,16 +17,14 @@ namespace BerlinClock.Classes.Parser
 
         public TimeParser()
         {
-            IContainer container = AutoFacRegistration.RetrieveAutofacContainer();
-
-            this.timeValidator = container.Resolve<ITimeValidator>();
+            this.timeValidator = new TimeValidator();
         }
 
         public TimeEntity Parse(string input)
         {
             if (!this.timeValidator.ValidateEntry(input))
             {
-                return null;
+                throw new TimeFormatException("Incorrect time argument");
             }
 
             string[] parts = input.Split(TIME_SEPARATOR);

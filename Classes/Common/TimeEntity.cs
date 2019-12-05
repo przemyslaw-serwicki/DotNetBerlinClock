@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BerlinClock.Classes.Common
+﻿namespace BerlinClock.Classes.Common
 {
-    public class TimeEntity
+    public struct TimeEntity
     {
-        public int Hours { get; set; }
+        public int hours;
 
-        public int Minutes { get; set; }
+        public int minutes;
 
-        public int Seconds { get; set; }
+        public int seconds;
 
         public TimeEntity(int hours, int minutes, int seconds)
         {
-            this.Hours = hours;
-            this.Minutes = minutes;
-            this.Seconds = seconds;
+            this.hours = hours;
+            this.minutes = minutes;
+            this.seconds = seconds;
         }
     }
 }
