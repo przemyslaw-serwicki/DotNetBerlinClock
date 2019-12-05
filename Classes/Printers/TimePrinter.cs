@@ -5,20 +5,28 @@ namespace BerlinClock.Classes.Printers
 {
     public class TimePrinter : ITimePrinter
     {
-        private readonly TimeUnitPrinterBase printerChain;
+        private readonly IPrinter secondsPrinter;
+
+        private readonly IPrinter hoursPrinter;
+
+        private readonly IPrinter minutesPrinter;
 
         public TimePrinter()
         {
-            var chain = new SecondsPrinter();
-            chain.SetNextPrinter(new HoursPrinter())
-                .SetNextPrinter(new MinutesPrinter());
-
-            this.printerChain = chain;
+            this.secondsPrinter = new SecondsPrinter();
+            this.hoursPrinter = new HoursPrinter();
+            this.minutesPrinter = new MinutesPrinter();
         }
 
         public string PrintTime(TimeEntity time)
         {
-            StringBuilder timeBuilder = this.printerChain.Print(time);
+            StringBuilder timeBuilder = new StringBuilder();
+
+            this.secondsPrinter.Print(time, timeBuilder);
+            timeBuilder.AppendLine();
+            this.hoursPrinter.Print(time, timeBuilder);
+            timeBuilder.AppendLine();
+            this.minutesPrinter.Print(time, timeBuilder);
 
             return timeBuilder.ToString();
         }

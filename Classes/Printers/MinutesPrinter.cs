@@ -3,7 +3,7 @@ using System.Text;
 
 namespace BerlinClock.Classes.Printers
 {
-    public class MinutesPrinter : TimeUnitPrinterBase
+    public class MinutesPrinter : IPrinter
     {
         private const int LAMPS_IN_FIRST_ROW = 11;
 
@@ -13,40 +13,40 @@ namespace BerlinClock.Classes.Printers
 
         private const int NUMBER_OF_QUARTERS_WITHIN_HOUR = 3;
 
-        protected override void HandlePrint(TimeEntity time)
+        public void Print(TimeEntity timeEntity, StringBuilder printedBuilder)
         {
-            int numberOfMinutes = time.minutes;
+            int numberOfMinutes = timeEntity.minutes;
 
-            this.PopulateFirstRow(numberOfMinutes);
-            this.stringBuilder.AppendLine();
-            this.PopulateSecondRow(numberOfMinutes);
+            this.PopulateFirstRow(numberOfMinutes, printedBuilder);
+            printedBuilder.AppendLine();
+            this.PopulateSecondRow(numberOfMinutes, printedBuilder);
         }
 
-        private void PopulateFirstRow(int minutes)
+        private void PopulateFirstRow(int minutes, StringBuilder printedBuilder)
         {
             int numberOfActiveLamps = minutes / MINUTES_DIVIDER;
 
             for (int i = 1; i <= numberOfActiveLamps; i++)
             {
                 char color = i % NUMBER_OF_QUARTERS_WITHIN_HOUR == 0 ? Colors.Red : Colors.Yellow;
-                this.stringBuilder.Append(color);
+                printedBuilder.Append(color);
             }
 
             for (int i = numberOfActiveLamps; i < LAMPS_IN_FIRST_ROW; i++)
             {
-                this.stringBuilder.Append(Colors.None);
+                printedBuilder.Append(Colors.None);
             }
         }
 
-        private void PopulateSecondRow(int minutes)
+        private void PopulateSecondRow(int minutes, StringBuilder printedBuilder)
         {
             int numberOfActiveLamps = minutes % MINUTES_DIVIDER;
 
-            this.stringBuilder.Append(Colors.Yellow, numberOfActiveLamps);
+            printedBuilder.Append(Colors.Yellow, numberOfActiveLamps);
 
             for (int i = numberOfActiveLamps; i < LAMPS_IN_SECOND_ROW; i++)
             {
-                this.stringBuilder.Append(Colors.None);
+                printedBuilder.Append(Colors.None);
             }
         }
     }

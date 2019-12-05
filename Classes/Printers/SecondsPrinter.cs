@@ -3,14 +3,14 @@ using System.Text;
 
 namespace BerlinClock.Classes.Printers
 {
-    public class SecondsPrinter : TimeUnitPrinterBase
+    public class SecondsPrinter : IPrinter
     {
-        protected override void HandlePrint(TimeEntity time)
+        public void Print(TimeEntity timeEntity, StringBuilder printedBuilder)
         {
-            int numberOfSeconds = time.seconds;
+            int numberOfSeconds = timeEntity.seconds;
             char color = numberOfSeconds % 2 > 0 ? Colors.None : Colors.Yellow;
 
-            this.stringBuilder.Append(color);
+            printedBuilder.Append(color);
         }
     }
 }
